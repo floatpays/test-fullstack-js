@@ -4,6 +4,14 @@
 
     psql < database.sql
 
-## Start Server
+## Install npm packages
 
-    npm run server
+    yarn install
+
+## Start Backend Server
+
+    yarn server
+
+## Start React app
+
+    yarn start
