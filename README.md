@@ -4,6 +4,7 @@
 
 - postgresql
 - nodejs >= 14
+- a web browser
 
 ## Setup database
 
