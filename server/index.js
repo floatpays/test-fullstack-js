@@ -10,9 +10,30 @@ const { Client } = require('pg');
 
 const connectionString = 'postgresql://localhost:5432/floatpays'
 
+
 app.use(express.static('./'))
 app.use(cors({ origin: '*' }));
 app.use(pino);
+app.use(express.json());
+
+app.post('/api/v1/transactions', async (request, response) => {
+  const client = new Client({ connectionString });
+  await client.connect();
+
+  const reference = crypto.randomUUID();
+
+  const { amount, description } = request.body;
+
+  client.query('insert into transactions(reference, amount, description) values($1::text, $2::numeric, $3::text)', [reference, amount, description], (err, res) => {
+    if (err) {
+      console.log(err.stack);
+      response.send([]);
+    } else {
+      response.send(res.rows);
+    }
+    client.end()
+  })
+});
 
 app.get('/api/v1/transactions', async (request, response) => {
   const client = new Client({ connectionString });
@@ -20,9 +41,9 @@ app.get('/api/v1/transactions', async (request, response) => {
   client.query('select created_at, amount, reference, description from transactions', (err, res) => {
     if (err) {
       console.log(err.stack);
-      response.send([]);
+      response.json([]);
     } else {
-      response.send(res.rows);
+      response.json(res.rows);
     }
     client.end()
   })
