@@ -1,4 +1,4 @@
-DROP DATABASE floatpays;
+DROP DATABASE IF EXISTS floatpays;
 
 CREATE DATABASE floatpays;
 
