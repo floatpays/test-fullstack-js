@@ -13,7 +13,10 @@ create table transactions(
 );
 
 INSERT INTO transactions(reference, amount, description)
-VALUES('123123', 200.12, 'Buying lunch');
+VALUES('123123', 200.12, 'Yum yum lunch');
 
 INSERT INTO transactions(amount, reference, description)
 VALUES('123222', 88.12, 'Coffee for my team');
+
+INSERT INTO transactions(amount, reference, description)
+VALUES('123222', 1300, 'Shoes');
