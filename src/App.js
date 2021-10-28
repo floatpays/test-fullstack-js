@@ -29,8 +29,7 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await Axios.post('/api/v1/transactions', {amount: 200, description: "foobar"});
-    console.log(result);
+    const result = await Axios.post('/api/v1/transactions', {amount: formData.amount, description: formData.description});
 
     await fetchTransactions();
 
