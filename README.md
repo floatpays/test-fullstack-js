@@ -16,4 +16,4 @@
 
 ## Start application
 
-    yarn server
+    yarn dev
