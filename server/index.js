@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const crypto = require('crypto');
-const cors = require('cors')
+const cors = require('cors');
+const pino = require('express-pino-logger')();
 
 const app = express();
 
@@ -11,6 +12,7 @@ const connectionString = 'postgresql://localhost:5432/floatpays'
 
 app.use(express.static('./'))
 app.use(cors({ origin: '*' }));
+app.use(pino);
 
 app.get('/api/v1/transactions', async (request, response) => {
   const client = new Client({ connectionString });
@@ -26,4 +28,8 @@ app.get('/api/v1/transactions', async (request, response) => {
   })
 });
 
-app.listen(process.env.port || 4000);
+const port = process.env.port || 4000;
+
+app.listen(port, () => {
+  console.log(`Server is running on localhost:${port}`);
+});

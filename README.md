@@ -8,10 +8,6 @@
 
     yarn install
 
-## Start Backend Server
+## Start application
 
     yarn server
-
-## Start React app
-
-    yarn start

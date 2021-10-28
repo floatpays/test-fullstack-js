@@ -5,7 +5,7 @@ function App() {
   const [transactions, setTransactions] = useState([]);
 
   const fetchTransactions = async () => {
-    const { data } = await Axios.get('http://localhost:4000/api/v1/transactions');
+    const { data } = await Axios.get('/api/v1/transactions');
 
     setTransactions(data);
   };
@@ -16,15 +16,15 @@ function App() {
 
   return (
     <div className="App">
-    <h2>Floatpays</h2>
+      <h2>Floatpays</h2>
 
-    <hr />
+      <hr />
 
-    <h3>Transactions</h3>
+      <h3>Transactions</h3>
 
-    {transactions.map((transaction) => (
-      <p key={transaction.reference}>R{transaction.amount} - {transaction.description}</p>
-    ))}
+      {transactions.map((transaction) => (
+        <p key={transaction.reference}>R{transaction.amount} - {transaction.description}</p>
+      ))}
 
     </div>
   );
