@@ -54,3 +54,24 @@ const port = process.env.port || 4000;
 app.listen(port, () => {
   console.log(`Server is running on localhost:${port}`);
 });
+
+
+// Delete by passing "?id=" in the querystring.
+// Returns true on success and false on failure.
+app.delete('/api/v1/transactions', async (request, response) => {
+
+  const client = new Client({ connectionString });
+  await client.connect();
+
+  const { id } = request.query;
+
+  client.query('delete from transactions where id = $1::numeric', [id], (err, res) => {
+    if (err) {
+      console.log(err.stack);
+      response.send(false);
+    } else {
+      response.send(true);
+    }
+    client.end()
+  })
+});
